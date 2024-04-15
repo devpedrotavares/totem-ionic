@@ -13,5 +13,13 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-card>
+    <ion-card-header>
+      Central de atendimento
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="block" (click)="senhasService.chamarCliente()">Chamar próximo cliente</ion-button>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
