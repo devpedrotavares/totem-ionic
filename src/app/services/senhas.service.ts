@@ -38,7 +38,40 @@ export class SenhasService {
     return this.senhasChamadas;
   }
 
-  chamarCliente() {
+  inicio() {
+    this.gerenciar(1);
+    this.gerenciar(2);
+    this.gerenciar(3);
+  }
+
+  gerenciar(guiche : number) {
+    let tipo = this.chamarCliente(guiche);
+
+    if(!tipo) tipo = "";
+
+    if(tipo === 'SP') {
+      setTimeout(() => {
+        this.gerenciar(guiche);
+      }, 10000);
+    }
+    else if(tipo === 'SE') {
+      setTimeout(() => {
+        this.gerenciar(guiche);
+      }, 7000);
+    }
+    else if(tipo === 'SG') {
+      setTimeout(() => {
+        this.gerenciar(guiche);
+      }, 5000);
+    }
+    else {
+      setTimeout(() => {
+        this.gerenciar(guiche);
+      }, 5000);
+    }
+  }
+
+  chamarCliente(guiche : number) {
     let senha : any;
     
     const sps = this.senhasArray.get('SP');
@@ -55,9 +88,7 @@ export class SenhasService {
     }
 
     if(!senha) {
-      alert("A fila está vazia!");
-
-      return;
+      return "";
     }
 
     if(this.senhasChamadas.length > 5) {
@@ -66,11 +97,13 @@ export class SenhasService {
 
     this.senhasChamadas.push(senha);
 
-    this.guicheAtual = (this.guicheAtual % 3) + 1;
-
-    this.senhasGuiche.set(senha, this.guicheAtual);
+    this.senhasGuiche.set(senha, guiche);
 
     this.prioridade = !this.prioridade;
+
+    const index = senha.indexOf('S');
+
+    return senha.substring(index, index + 2);
   }
 
   computaSoma(tipoSenha: string = '') {
