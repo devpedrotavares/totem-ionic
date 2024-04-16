@@ -14,6 +14,8 @@ export class SenhasService {
   public senhasExame: number = 0;
   public senhasTotal: number = 0;
 
+  public senhasAtendidas: number = 0;
+
   public prioridade: boolean = true;
 
   public inputNovaSenha : string = '';
@@ -96,6 +98,8 @@ export class SenhasService {
     }
 
     this.senhasChamadas.push(senha);
+
+    this.senhasAtendidas++;
 
     this.senhasGuiche.set(senha, guiche);
 
